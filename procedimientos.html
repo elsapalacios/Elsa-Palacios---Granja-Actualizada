@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Ejecutar Procedimientos</title>
+</head>
+
+<body>
+  <h2>Selecciona un procedimiento a ejecutar</h2>
+  <form method="POST" action="php/procedimientos.php">
+    <label for="procedimiento">Procedimiento:</label>
+    <select name="procedimiento" id="procedimiento">
+      <option value="actualizarUbicacion">Actualizar Ubicacion Animal</option>
+      <option value="insertarEspecie">Insertar Especie</option>
+      <option value="obtenerAnimal">Obtener Animal</option>
+      <option value="obtenerEspecie">Obtener Especie</option>
+    </select>
+    <br><br>
+    <div id="parametros">
+      <!-- Los campos de entrada cambiarán según la opción seleccionada -->
+    </div>
+    <br>
+    <input type="submit" value="Ejecutar">
+  </form>
+
+  <script>
+    document.getElementById("procedimiento").addEventListener("change", function () {
+      var selected = this.value;
+      var parametrosDiv = document.getElementById("parametros");
+      parametrosDiv.innerHTML = ""; // Limpiar
+
+      if (selected === "actualizarUbicacion") {
+        parametrosDiv.innerHTML = '<label>ID Animal:</label> <input type="number" name="animal_id" required><br>' +
+          '<label>Nueva Ubicación:</label> <input type="text" name="nueva_ubicacion" required>';
+      } else if (selected === "insertarEspecie") {
+        parametrosDiv.innerHTML = '<label>Nombre Especie:</label> <input type="text" name="nombre" required><br>' +
+          '<label>Descripción:</label> <input type="text" name="descripcion" required>';
+      } else if (selected === "obtenerAnimal") {
+        parametrosDiv.innerHTML = '<label>ID Animal:</label> <input type="number" name="animal_id" required>';
+      } else if (selected === "obtenerEspecie") {
+        parametrosDiv.innerHTML = '<label>ID Especie:</label> <input type="number" name="id_especie" required>';
+      }
+    });
+  </script>
+</body>
+
+</html>
